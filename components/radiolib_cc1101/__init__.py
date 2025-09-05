@@ -13,13 +13,13 @@ DEPENDENCIES = ["spi"]
 
 MULTI_CONF = True
 
-radiolib_cc1101_ns = cg.esphome_ns.namespace("radiolib_cc1101")
-RadiolibCC1101Component = radiolib_cc1101_ns.class_(
-    "RadiolibCC1101Component", cg.Component, spi.SPIDevice
+radio_cc1101_ns = cg.esphome_ns.namespace("radio_cc1101")
+RadioCC1101Component = radio_cc1101_ns.class_(
+    "RadioCC1101Component", cg.Component, spi.SPIDevice
 )
 
 CONF_MODULATION = "modulation"
-CC1101Modulation = radiolib_cc1101_ns.enum("CC1101Modulation")
+CC1101Modulation = radio_cc1101_ns.enum("CC1101Modulation")
 CC1101_MODULATIONS = {
     "OOK": CC1101Modulation.OOK_MODULATION,
     "FSK": CC1101Modulation.FSK_MODULATION,
@@ -27,7 +27,7 @@ CC1101_MODULATIONS = {
 
 CONFIG_SCHEMA = (
     cv.Schema({
-        cv.GenerateID(): cv.declare_id(RadiolibCC1101Component),
+        cv.GenerateID(): cv.declare_id(RadioCC1101Component),
         cv.Optional(CONF_RX_PIN): pins.internal_gpio_input_pin_schema,
         cv.Optional(CONF_FREQUENCY, default="433.92MHz"): cv.frequency,
         cv.Optional(CONF_MODULATION, default="ook"): cv.enum(CC1101_MODULATIONS, upper=True, space="_"),
